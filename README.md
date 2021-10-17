@@ -1,3 +1,3 @@
 SPLab_Repo
-Repository created for SPLab lesson 1 assignments
-it contains shell scripts, and cmake files
+Repository created for SPLab lesson 1 assignments,
+It contains shell scripts, and cmake files

@@ -5,20 +5,18 @@
 if [ $# != 1 ]
 then
 	echo 'Usage: A single argument which is a path'
-	exit
-fi
+	exit 1
 
-if [ -d $1 ]
+elif [ -d $1 ]
 then
 	echo 'It is a directory'
-fi
 
-if [ -f $1 ]
+elif [ -f $1 ]
 then
 	echo 'It is a regular file'
-fi
 
-if [ ! -e $1 ]
+elif [ ! -e $1 ]
 then
 	echo 'Path doesnt exist'
+	exit 1
 fi
