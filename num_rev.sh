@@ -4,8 +4,8 @@
 
 if [ $# != 1 ]
 then
-	echo 'Usage: One numeric argument to reverse'
-	exit
+ echo 'Usage: One numeric argument to reverse'
+ exit
 fi
 
 echo $1 | rev

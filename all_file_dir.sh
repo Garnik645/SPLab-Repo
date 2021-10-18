@@ -4,13 +4,13 @@
 
 if [ $# != 1 ]
 then
-	echo "Usage: Give a folder name to see all file names on given folder with subfolders"
-	exit 1
+ echo "Usage: Give a folder name to see all file names on given folder with subfolders"
+ exit 1
 
 elif [ -d $1 ]
 then
-	ls -R $1
+ ls -R $1
 else
-	echo "Given file is not a folder"
-	exit 1
+ echo "Given file is not a folder"
+ exit 1
 fi
