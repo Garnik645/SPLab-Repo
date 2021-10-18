@@ -1,6 +1,0 @@
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake/build/CMakeFiles/rebuild_cache.dir
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake/build/CMakeFiles/edit_cache.dir
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake/build/CMakeFiles/SPLab.dir
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake/build/MathFunctionLib/CMakeFiles/rebuild_cache.dir
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake/build/MathFunctionLib/CMakeFiles/edit_cache.dir
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake/build/MathFunctionLib/CMakeFiles/MathFunctionLib.dir

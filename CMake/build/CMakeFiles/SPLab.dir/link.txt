@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/SPLab.dir/main.cpp.o  -o SPLab  MathFunctionLib/libMathFunctionLib.a 
