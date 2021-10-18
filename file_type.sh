@@ -4,7 +4,7 @@
 
 if [ $# != 1 ]
 then
- echo 'Usage: A single argument which is a path'
+ echo 'Pass a single argument which is a path'
  exit 1
 
 elif [ -d $1 ]

@@ -3,5 +3,8 @@
 
 int main()
 {
-	std::cout << gcd(75, 90) << '\n';
+	int x, y;
+	std::cin >> x >> y;
+	std::cout << gcd(x, y) << '\n';
+	return 0;
 }
