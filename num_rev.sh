@@ -9,4 +9,3 @@ then
 fi
 
 echo $1 | rev
-
