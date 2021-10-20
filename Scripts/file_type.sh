@@ -18,5 +18,5 @@ then
 elif [ ! -e $1 ]
 then
  echo 'Path doesnt exist'
-	exit 1
+ exit 1
 fi
