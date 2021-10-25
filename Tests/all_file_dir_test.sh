@@ -11,35 +11,39 @@ test_case() {
  fi
 }
 
-test_case "$("$REAL_PATH" "$THIS_PATH/..")" "/home/garnik-kh/git_workspace/SPLab-Repo:
+TEST_PATH="$(realpath "$THIS_PATH/..")"
+
+test_case "$("$REAL_PATH" "$THIS_PATH/..")" "${TEST_PATH}:
 CMake
 README.md
 Scripts
 Tests
 
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake:
+${TEST_PATH}/CMake:
 CMakeLists.txt
 main.cpp
 MathFunctionLib
 
-/home/garnik-kh/git_workspace/SPLab-Repo/CMake/MathFunctionLib:
+${TEST_PATH}/CMake/MathFunctionLib:
 CMakeLists.txt
 gcd.cpp
 gcd.h
 
-/home/garnik-kh/git_workspace/SPLab-Repo/Scripts:
+${TEST_PATH}/Scripts:
 all_file_dir.sh
 file_type.sh
 line_count.sh
 num_rev.sh
 
-/home/garnik-kh/git_workspace/SPLab-Repo/Tests:
+${TEST_PATH}/Tests:
 all_file_dir_test.sh
 file_type_test.sh
 line_count_test.sh
 num_rev_test.sh"
 
-test_case "$("$REAL_PATH" "$THIS_PATH")" "/home/garnik-kh/git_workspace/SPLab-Repo/Tests:
+TEST_PATH="$(realpath "$THIS_PATH")"
+
+test_case "$("$REAL_PATH" "$THIS_PATH")" "${TEST_PATH}:
 all_file_dir_test.sh
 file_type_test.sh
 line_count_test.sh
