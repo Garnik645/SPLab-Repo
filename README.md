@@ -1,4 +1,4 @@
-Repository created for SPLab lesson 1 assignments,
+## Repository created for SPLab lesson 1 assignments
 It contains shell scripts, tests for that scripts, cmake files and Dockerfile.
 1. Give all_file_dir.sh path to the directory and it will print all file names on given folder with subfolders
 2. Give file_type.sh path to the file and it will report its type
