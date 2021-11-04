@@ -6,3 +6,7 @@ It contains shell scripts, tests for that scripts, cmake files and Dockerfile.
 4. Give num_rev.sh a number and it will print it in reverse order
 
 Docker container runs all the scripts with specific arguments
+To create a docker image you should run this shell command from the root SPLab-Repo folder:
+# docker build -t splab -f Docker/Dockerfile .
+And to run the image and create a docker container:
+# docker run --rm splab
