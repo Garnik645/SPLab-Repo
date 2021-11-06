@@ -81,16 +81,23 @@ void dijkstra(std::priority_queue<Path, std::vector<Path>, std::greater<Path>>& 
     }
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    // check if input file is given
+    if(argc < 2)
+    {
+        std::cerr << "Input file path argument is missing\n";
+        exit(1);
+    }
+
     // open input file
     std::ifstream input;
-    input.open("input.txt");
+    input.open(argv[1]);
     
     // check for errors while opening the file
     if(input.fail())
     {
-        std::cerr << "Error opening 'input.txt'\n";
+        std::cerr << "Error opening the file\n";
         exit(1);
     }
     
