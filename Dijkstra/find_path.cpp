@@ -97,7 +97,7 @@ int main(int argc, char** argv)
     // check for errors while opening the file
     if(input.fail())
     {
-        std::cerr << "Error opening the file\n";
+        std::cerr << "Something went wrong while opening the file\n";
         exit(1);
     }
     
