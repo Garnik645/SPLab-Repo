@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(a.out)
+project(find_path)
 
-add_executable(a.out main.cpp)
+add_executable(find_path find_path.cpp)
