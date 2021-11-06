@@ -1,7 +1,6 @@
 # SPLab lessons
 ## Shell scripts and cmake task
-
-It contains shell scripts, tests for that scripts, cmake files.<br />
+### It contains shell scripts, tests for that scripts, cmake files.<br />
 <br />
 
 1. Give all_file_dir.sh path to the directory and it will print all file names on given folder with subfolders.
@@ -12,7 +11,7 @@ It contains shell scripts, tests for that scripts, cmake files.<br />
 <br />
 
 ## Docker task
-Task to create a Docker image which runs all the scripts with specific arguments.<br />
+### Task to create a Docker image which runs all the scripts with specific arguments.<br />
 <br />
 
 To create a docker image you should run this shell command from the SPLab-Repo folder:
@@ -27,7 +26,7 @@ docker run --rm splab
 <br />
 
 ## Graph algorithm task
-Task to find all the shortest paths between two nodes in a graph.<br />
+### Task to find all the shortest paths between two nodes in a graph.<br />
 <br />
 Task folder contains find_path.cpp program which reads from the input file,
 uses Dijkstra's algorithm to find shortest path between the nodes,
