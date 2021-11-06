@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <limits>
+#include <algorithm>
 #include <queue>
 
 struct Path;
@@ -38,24 +39,24 @@ struct Path
 };
 
 // print all shortest paths
-void print_paths(Node* start, Node* current, std::vector<size_t>& path)
+void print_paths(Node* start, Node* current, std::vector<size_t>& path, std::vector<std::string>& sorted)
 {
-    // print the path if reached the beginning
     if(current == start)
     {
-        std::cout << start->index << ' ';
+        std::string str = "";
+        str += std::to_string(start->index) + ' ';
         for(int i = path.size() - 1; i >= 0; --i)
         {
-            std::cout << path[i] << ' ';
+            str += std::to_string(path[i]) + ' ';
         }
-        std::cout << std::endl;
+        sorted.push_back(str);
         return;
     }
-    // recursively go through the path
+    
     for(size_t i = 0; i < current->prev.size(); ++i)
     {
         path.push_back(current->index);
-        print_paths(start, current->prev[i], path);
+        print_paths(start, current->prev[i], path, sorted);
         path.pop_back();
     }
 }
@@ -133,8 +134,13 @@ int main(int argc, char** argv)
 
     // print results
     std::cout << "Shortest distance: " << v[end].shortest << std::endl;
-    std::vector<size_t> p;
-    print_paths(&v[begin], &v[end], p);
-    
+    std::vector<size_t> path;
+    std::vector<std::string> sorted;
+    print_paths(&v[begin], &v[end], path, sorted);
+    std::sort(sorted.begin(), sorted.end());
+    for(size_t i = 0; i < sorted.size(); ++i)
+    {
+        std::cout << sorted[i] << std::endl;
+    }
     return 0;
 }
