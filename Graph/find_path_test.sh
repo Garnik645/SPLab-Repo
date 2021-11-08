@@ -1,9 +1,17 @@
 #!/bin/bash
 DIV=$(dirname $(readlink -f $0))
+EXE=${DIV}/build/find_path
+
+if [ ! -f "${EXE}" ]
+then
+    echo "Executable file doesn't exist!"
+    exit 1
+fi
+
 run_program() {
-    ${DIV}/find_path $1
+    ${EXE} $1
 }
-g++ ${DIV}/find_path.cpp -o ${DIV}/find_path
+
 for i in {1..2}
 do
     touch ${DIV}/tester.txt
@@ -12,10 +20,9 @@ do
     then
         echo "fail"
         rm ${DIV}/tester.txt
-        rm ${DIV}/find_path
         exit 1
     fi
     rm ${DIV}/tester.txt
 done
-rm ${DIV}/find_path
+
 echo "success"
