@@ -32,6 +32,7 @@ Task folder contains find_path.cpp program which reads from the input file,
 uses Dijkstra's algorithm to find shortest path between the nodes,
 and prints shortest distance and all the shortest paths in lexicographical order.
 It also contains cmake files, tests and a shell script to run these tests.<br />
+
 #### How to build
 To build the project open the terminal in SPLab-Repo/Graph folder and run these two commands:
 ```
@@ -39,6 +40,7 @@ cmake -S . -B build/
 make -C build/
 ```
 <br />
+
 #### Input file structure
 The first line of input file contains two non-negative integers **N** & **M** (1 ≤ **N** ≤ 10<sup>4</sup>)
 — the number of nodes and number of edges in a graph.<br />
