@@ -29,7 +29,7 @@ struct Path
     }
 };
 
-void print_paths(Node* start, Node* current, std::vector<size_t>& path, std::vector<std::string>& sorted)
+void print_paths(Node* start, Node* current, std::vector<size_t>& path, std::vector<std::string>& output)
 {
     if(current == start)
     {
@@ -39,21 +39,21 @@ void print_paths(Node* start, Node* current, std::vector<size_t>& path, std::vec
         {
             str += std::to_string(path[i]) + ' ';
         }
-        sorted.push_back(str);
+        output.push_back(str);
         return;
     }
     for(size_t i = 0; i < current->prev.size(); ++i)
     {
         path.push_back(current->index);
-        print_paths(start, current->prev[i], path, sorted);
+        print_paths(start, current->prev[i], path, output);
         path.pop_back();
     }
 }
 
-void dijkstra(std::priority_queue<Path, std::vector<Path>, std::greater<Path>>& que)
+void dijkstra(std::priority_queue<Path, std::vector<Path>, std::greater<Path>>& update_queue)
 {
-    Path path = que.top();
-    que.pop();
+    Path path = update_queue.top();
+    update_queue.pop();
     for(size_t i = 0; i < path.node_ptr->edges.size(); ++i)
     {
         Path next_path = path.node_ptr->edges[i];
@@ -61,7 +61,7 @@ void dijkstra(std::priority_queue<Path, std::vector<Path>, std::greater<Path>>& 
         {
             next_path.node_ptr->shortest = path.node_ptr->shortest + next_path.dist;
             next_path.node_ptr->prev.clear();
-            que.push(Path(next_path.node_ptr->shortest, next_path.node_ptr));
+            update_queue.push(Path(next_path.node_ptr->shortest, next_path.node_ptr));
         }
         if(path.dist + next_path.dist == next_path.node_ptr->shortest)
         {
@@ -74,7 +74,7 @@ int main(int argc, char** argv)
 {
     if(argc < 2)
     {
-        std::cerr << "Input file path argument is missing\n";
+        std::cerr << "Input file path argument is missing" << std::endl;
         exit(1);
     }
 
@@ -83,45 +83,50 @@ int main(int argc, char** argv)
     
     if(input.fail())
     {
-        std::cerr << "Something went wrong while opening the file\n";
+        std::cerr << "Something went wrong while opening the file" << std::endl;
         exit(1);
     }
     
-    size_t n, m;
-    input >> n >> m;
+    size_t node_num, edge_num;
+    input >> node_num >> edge_num;
     
-    std::vector<Node> v(n);
-    for(size_t i = 0; i < n; ++i) v[i].index = i;
-
-    for(size_t i = 0; i < m; ++i)
+    std::vector<Node> nodes(node_num);
+    for(size_t i = 0; i < node_num; ++i)
     {
-        size_t x, y, z;
-        input >> x >> y >> z;
-        v[x].edges.push_back(Path(z, &v[y]));
-        v[y].edges.push_back(Path(z, &v[x]));
+        nodes[i].index = i;
+    }
+
+    for(size_t i = 0; i < edge_num; ++i)
+    {
+        size_t first_node, second_node, distance;
+        input >> first_node >> second_node >> distance;
+        nodes[first_node].edges.push_back(Path(distance, &nodes[second_node]));
+        nodes[second_node].edges.push_back(Path(distance, &nodes[first_node]));
     }
 
     size_t begin, end;
     input >> begin >> end;
 
-    std::priority_queue<Path, std::vector<Path>, std::greater<Path>> que;
-    v[begin].shortest = 0;
-    que.push(Path(0, &v[begin]));
-    while(!que.empty())
+    std::priority_queue<Path, std::vector<Path>, std::greater<Path>> update_queue;
+    nodes[begin].shortest = 0;
+    update_queue.push(Path(0, &nodes[begin]));
+    while(!update_queue.empty())
     {
-        dijkstra(que);
+        dijkstra(update_queue);
     }
 
-    std::cout << "Shortest distance: " << v[end].shortest << std::endl;
+    std::cout << "Shortest distance: " << nodes[end].shortest << std::endl;
     
     std::vector<size_t> path;
-    std::vector<std::string> sorted;
-    print_paths(&v[begin], &v[end], path, sorted);
+    std::vector<std::string> output;
+    print_paths(&nodes[begin], &nodes[end], path, output);
     
-    std::sort(sorted.begin(), sorted.end());
-    for(size_t i = 0; i < sorted.size(); ++i)
+    std::sort(output.begin(), output.end());
+    for(size_t i = 0; i < output.size(); ++i)
     {
-        std::cout << sorted[i] << std::endl;
+        std::cout << output[i] << std::endl;
     }
+
+    input.close();
     return 0;
 }
