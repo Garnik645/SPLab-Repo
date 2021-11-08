@@ -26,9 +26,23 @@ docker run --rm splab
 <br />
 
 ## Graph algorithm task
-### Task to find all the shortest paths between two nodes in a graph.<br />
+### Task to find all the shortest paths between two nodes in an undirected graph.<br />
 <br />
 Task folder contains find_path.cpp program which reads from the input file,
 uses Dijkstra's algorithm to find shortest path between the nodes,
 and prints shortest distance and all the shortest paths in lexicographical order.
-It also contains cmake files, tests and a shell script to run these tests.
+It also contains cmake files, tests and a shell script to run these tests.<br />
+#### How to build
+To build the project open the terminal in SPLab-Repo/Graph folder and run these two commands:
+```
+cmake -S . -B build/
+make -C build/
+```
+<br />
+#### Input file structure
+The first line of input file contains two non-negative integers **N** & **M** (1 ≤ **N** ≤ 10<sup>4</sup>)
+— the number of nodes and number of edges in a graph.<br />
+Next **M** lines contain 3 non-negative integers **X**, **Y** & **Z** (0 ≤ **X**, **Y** < **N**).
+**X** & **Y** — index of two nodes connected by an edge with the length of **Z**.<br />
+Next line contains two non-negative integers **S** & **F** (0 ≤ **S**, **F** < **N**)
+— index of the first node and the last node in a path.
