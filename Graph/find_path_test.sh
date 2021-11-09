@@ -15,7 +15,7 @@ run_program() {
 for i in {1..2}
 do
     run_program "${DIV}/Tests/test${i}.in.txt" > "${DIV}/tester.txt"
-    if ! cmp -s "${DIV}/tester.txt" "${DIV}/Tests/test${i}.out.txt"
+    if [ -n "$(cmp ${DIV}/tester.txt ${DIV}/Tests/test${i}.out.txt)" ]
     then
         echo "fail"
         rm ${DIV}/tester.txt
