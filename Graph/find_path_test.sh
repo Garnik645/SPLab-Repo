@@ -14,7 +14,6 @@ run_program() {
 
 for i in {1..2}
 do
-    touch ${DIV}/tester.txt
     run_program "${DIV}/Tests/test${i}.in.txt" > "${DIV}/tester.txt"
     if ! cmp -s "${DIV}/tester.txt" "${DIV}/Tests/test${i}.out.txt"
     then
