@@ -32,9 +32,9 @@ rm ${DIV}/tester.txt
 # Test 2
 for i in {1..100}
 do
-    ${GEN_1}
-    run_program "${DIV}/gen_test_1.in.txt" > "${DIV}/tester.txt"
-    if ! cmp -s ${DIV}/tester.txt ${DIV}/gen_test_1.out.txt
+    ${GEN_1} ${DIV}/Generated_Tests
+    run_program "${DIV}/Generated_Tests/gen_test_1.in.txt" > "${DIV}/tester.txt"
+    if ! cmp -s ${DIV}/tester.txt ${DIV}/Generated_Tests/gen_test_1.out.txt
     then
         echo "fail"
         rm ${DIV}/tester.txt
@@ -42,6 +42,6 @@ do
     fi
     rm ${DIV}/tester.txt
 done
-rm gen_test_1.in.txt gen_test_1.out.txt
+rm ${DIV}/Generated_Tests/gen_test_1.in.txt ${DIV}/Generated_Tests/gen_test_1.out.txt
 
 echo "success"

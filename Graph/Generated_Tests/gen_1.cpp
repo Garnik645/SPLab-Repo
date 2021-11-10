@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <random>
 #include <algorithm>
 #include <fcntl.h>
@@ -39,15 +40,23 @@ void print_right(int x, int y)
     std::cout << y << ' ';
 }
 
-int main()
+int main(int argc, char** argv)
 {
-    int input = open("gen_test_1.in.txt", O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
+    if(argc < 2)
+    {
+        std::cerr << "Path for generating files was not given" << std::endl;
+        exit(1);
+    }
+    std::string path = argv[1];
+    std::string inputname = path + "/gen_test_1.in.txt";
+    int input = open(inputname.c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
     if(input < 0)
 	{
 		std::cerr << "Something went wrong while opening (creating) input file. Error " << errno << std::endl;
 		exit(errno);
 	}
-    int output = open("gen_test_1.out.txt", O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
+    std::string outputname = path + "/gen_test_1.out.txt";
+    int output = open(outputname.c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
     if(output < 0)
 	{
 		std::cerr << "Something went wrong while opening (creating) output file. Error " << errno << std::endl;
