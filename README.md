@@ -34,10 +34,11 @@ and prints shortest distance and all the shortest paths in lexicographical order
 It also contains cmake files, tests and a shell script to run these tests.<br />
 
 #### How to build
-To build the project open the terminal in SPLab-Repo/Graph folder and run these two commands:
+To build the project open the terminal in SPLab-Repo/Graph folder and run these three commands:
 ```
 cmake -S . -B build/
 make -C build/
+make -C Generated_Tests/
 ```
 <br />
 
