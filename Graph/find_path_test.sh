@@ -33,7 +33,6 @@ rm ${DIV}/tester.txt
 for i in {1..100}
 do
     ${GEN_1}
-    touch "tester.txt"
     run_program "${DIV}/gen_test_1.in.txt" > "${DIV}/tester.txt"
     if ! cmp -s ${DIV}/tester.txt ${DIV}/gen_test_1.out.txt
     then
