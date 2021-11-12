@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 	}
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist6(0, 9998);
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(0, N_SIZE - 1);
     int x = dist6(rng);
     int y = dist6(rng);
     dup2(input, 1);
