@@ -72,14 +72,26 @@ int main(int argc, char** argv)
     int root = std::sqrt(N_SIZE);
     for(int i = 0; i < N_SIZE; ++i)
     {
-        if(i >= root) ++edges;
-        if(i % root != 0) ++edges;
+        if(i >= root)
+        {
+            ++edges;
+        }
+        if(i % root != 0)
+        {
+            ++edges;
+        }
     }
     std::cout << N_SIZE << ' ' << edges << std::endl;
     for(int i = 0; i < N_SIZE; ++i)
     {
-        if(i >= root) std::cout << i << ' ' << i - root << ' ' << 1 << std::endl;
-        if(i % root != 0) std::cout << i << ' ' << i - 1 << ' ' << 1 << std::endl;
+        if(i >= root)
+        {
+            std::cout << i << ' ' << i - root << ' ' << 1 << std::endl;
+        }
+        if(i % root != 0)
+        {
+            std::cout << i << ' ' << i - 1 << ' ' << 1 << std::endl;
+        }
     }
     std::random_device dev;
     std::mt19937 rng(dev());
@@ -89,8 +101,14 @@ int main(int argc, char** argv)
     int y = end_rand(rng);
     y -= 400;
     y += x;
-    if(y < 0) y = 0;
-    if(y >= N_SIZE) y = N_SIZE - 1;
+    if(y < 0)
+    {
+        y = 0;
+    }
+    if(y >= N_SIZE)
+    {
+        y = N_SIZE - 1;
+    }
     std::cout << x << ' ' << y << std::flush;
     dup2(output, 1);
     std::cout << "Shortest distance: " <<  std::abs(x % root - y % root) + std::abs(x / root - y / root) << std::endl;
