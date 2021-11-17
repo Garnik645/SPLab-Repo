@@ -1,25 +1,22 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <cmath>
 #include <random>
 #include <algorithm>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <cerrno>
 
 // N_SIZE >= 100
 #define N_SIZE 10000
 
-void find_path(int current, int end, std::vector<int>& out, int root)
+void find_path(int current, int end, std::vector<int>& buffer, std::ofstream& out, int root)
 {
-    out.push_back(current);
+    buffer.push_back(current);
     if(current == end)
     {
-        for(size_t i = 0; i < out.size(); ++i)
+        for(size_t i = 0; i < buffer.size(); ++i)
         {
-            std::cout << out[i] << ' ';
+            std::cout << buffer[i] << ' ';
         }
         std::cout << std::endl;
     }
@@ -27,22 +24,22 @@ void find_path(int current, int end, std::vector<int>& out, int root)
     {
         if(current / root > end / root)
         {
-            find_path(current - root, end, out, root);
+            find_path(current - root, end, buffer, out, root);
         }
         if(current % root > end % root)
         {
-            find_path(current - 1, end, out, root);
+            find_path(current - 1, end, buffer, out, root);
         }
         if(current % root < end % root)
         {
-            find_path(current + 1, end, out, root);
+            find_path(current + 1, end, buffer, out, root);
         }
         if(current / root < end / root)
         {
-            find_path(current + root, end, out, root);
+            find_path(current + root, end, buffer, out, root);
         }
     }
-    out.pop_back();
+    buffer.pop_back();
 }
 
 int main(int argc, char** argv)
@@ -54,20 +51,19 @@ int main(int argc, char** argv)
     }
     std::string path = argv[1];
     std::string inputname = path + "/gen_test_2.in.txt";
-    int input = open(inputname.c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
-    if(input < 0)
+    std::ofstream input(inputname, std::ios_base::trunc);
+    if(input.fail())
 	{
-		std::cerr << "Something went wrong while opening (creating) input file. Error " << errno << std::endl;
-		exit(errno);
+		std::cerr << "Something went wrong while opening (creating) input file." << std::endl;
+		exit(1);
 	}
     std::string outputname = path + "/gen_test_2.out.txt";
-    int output = open(outputname.c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
-    if(output < 0)
+    std::ofstream output(outputname, std::ios_base::trunc);
+    if(output.fail())
 	{
-		std::cerr << "Something went wrong while opening (creating) output file. Error " << errno << std::endl;
-		exit(errno);
+		std::cerr << "Something went wrong while opening (creating) output file." << std::endl;
+		exit(1);
 	}
-    dup2(input, 1);
     int edges = 0;
     int root = std::sqrt(N_SIZE);
     for(int i = 0; i < N_SIZE; ++i)
@@ -81,16 +77,16 @@ int main(int argc, char** argv)
             ++edges;
         }
     }
-    std::cout << N_SIZE << ' ' << edges << std::endl;
+    input << N_SIZE << ' ' << edges << std::endl;
     for(int i = 0; i < N_SIZE; ++i)
     {
         if(i >= root)
         {
-            std::cout << i << ' ' << i - root << ' ' << 1 << std::endl;
+            input << i << ' ' << i - root << ' ' << 1 << std::endl;
         }
         if(i % root != 0)
         {
-            std::cout << i << ' ' << i - 1 << ' ' << 1 << std::endl;
+            input << i << ' ' << i - 1 << ' ' << 1 << std::endl;
         }
     }
     std::random_device dev;
@@ -109,10 +105,9 @@ int main(int argc, char** argv)
     {
         y = N_SIZE - 1;
     }
-    std::cout << x << ' ' << y << std::flush;
-    dup2(output, 1);
-    std::cout << "Shortest distance: " <<  std::abs(x % root - y % root) + std::abs(x / root - y / root) << std::endl;
-    std::vector<int> out;
-    find_path(x, y, out, root);
+    input << x << ' ' << y << std::flush;
+    output << "Shortest distance: " <<  std::abs(x % root - y % root) + std::abs(x / root - y / root) << std::endl;
+    std::vector<int> buffer;
+    find_path(x, y, buffer, output, root);
     return 0;
 }
