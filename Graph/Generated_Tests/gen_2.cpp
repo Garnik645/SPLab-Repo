@@ -16,9 +16,9 @@ void find_path(int current, int end, std::vector<int>& buffer, std::ofstream& ou
     {
         for(size_t i = 0; i < buffer.size(); ++i)
         {
-            std::cout << buffer[i] << ' ';
+            out << buffer[i] << ' ';
         }
-        std::cout << std::endl;
+        out << std::endl;
     }
     else
     {

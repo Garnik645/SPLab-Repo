@@ -12,14 +12,14 @@ void print_left(std::ofstream& out, int x, int y)
     int i = x;
     while(i != y)
     {
-        std::cout << i << ' ';
+        out << i << ' ';
         --i;
         if(i < 0)
         {
             i = N_SIZE - 1;
         }
     }
-    std::cout << y << ' ';
+    out << y << ' ';
 }
 
 void print_right(std::ofstream& out, int x, int y)
