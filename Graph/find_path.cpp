@@ -29,25 +29,23 @@ struct Path
     }
 };
 
-void print_paths(Node* start, Node* current, std::vector<size_t>& path, std::vector<std::string>& output)
+void print_paths(Node* start, Node* current, std::vector<size_t>& path, std::vector<std::vector<size_t>>& output)
 {
+    path.push_back(current->index);
     if(current == start)
     {
-        std::string str = "";
-        str += std::to_string(start->index) + ' ';
-        for(int i = path.size() - 1; i >= 0; --i)
-        {
-            str += std::to_string(path[i]) + ' ';
-        }
-        output.push_back(str);
-        return;
+        std::vector<size_t> rev_path = path;
+        std::reverse(rev_path.begin(), rev_path.end());
+        output.push_back(std::move(rev_path));
     }
-    for(size_t i = 0; i < current->prev.size(); ++i)
+    else
     {
-        path.push_back(current->index);
-        print_paths(start, current->prev[i], path, output);
-        path.pop_back();
+        for(size_t i = 0; i < current->prev.size(); ++i)
+        {
+            print_paths(start, current->prev[i], path, output);
+        }
     }
+    path.pop_back();
 }
 
 void dijkstra(std::priority_queue<Path, std::vector<Path>, std::greater<Path>>& update_queue)
@@ -118,13 +116,17 @@ int main(int argc, char** argv)
     std::cout << "Shortest distance: " << nodes[end].shortest << std::endl;
     
     std::vector<size_t> path;
-    std::vector<std::string> output;
+    std::vector<std::vector<size_t>> output;
     print_paths(&nodes[begin], &nodes[end], path, output);
     
     std::sort(output.begin(), output.end());
     for(size_t i = 0; i < output.size(); ++i)
     {
-        std::cout << output[i] << std::endl;
+        for(size_t j = 0; j < output[i].size(); ++j)
+        {
+            std::cout << output[i][j] << ' ';
+        }
+        std::cout << std::endl;
     }
 
     input.close();
